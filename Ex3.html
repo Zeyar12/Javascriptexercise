@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <title>
+
+    </title>
+    <head>
+        <script>
+        function findEvenOdd(){
+            var num=document.getElementById('num').value;
+            if(num %2 == 0){
+                document.getElementById('result').innerHTML=num+'is an even ';
+
+            }
+            else{
+                document.getElementById('result').innerHTML=num+'is an odd ';
+
+            }
+        }
+    </script>
+
+    </head>
+    <body>
+        <h2>To find even or odd</h2>
+       <label> Enter a number:</label><br>
+       <input type="number" id="num">
+       <input type="button" value="Find even or odd" onclick="findEvenOdd()" name="find">
+       <div style="margin-top: 10px;" id="result"></div>
+
+
+
+    </body>
+</html>
