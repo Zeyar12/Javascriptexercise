@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <title>
+
+    </title>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"> </script>
+
+        <style>
+ .grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  
+  padding: 10px;
+}
+.grid-item {
+  
+  
+  padding: 5px;
+  font-size: 10px;
+  text-align: center;
+}
+.main{
+    position: relative;
+    width:100%;
+    height: 450px;
+    background-color:azure;
+}
+.first{
+    width:25%;
+    height: 100%;
+    
+    float: left;
+}
+.second{
+    width:70%;
+    height: 100%;
+    
+    float: left;
+}
+.first1{
+    
+    width: 100%;
+    height:30%;
+    padding-top:13%;
+    padding-left: 20%;
+    padding-bottom: 1%;
+
+
+}
+.first2{
+    
+    width: 100%;
+    height:45%;
+    padding-top:13%;
+    padding-left: 20%;
+    padding-bottom: 3%;
+
+
+}
+
+.second1{
+    position:relative;
+    left:10%;
+    width:100%;
+    height:40%;
+    
+
+}
+.second2{
+    position: relative;
+    width:100%;
+    height:45%;
+    
+    padding-top:5%;
+    left:10%;
+    right:5%;
+
+}
+table, td, th {
+  
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+}
+
+th {
+  height: 50px;
+}
+
+        </style>
+        <script>
+
+            $(function(){
+                $("#calculate").click(function(){
+
+             var newBudget=parseInt($("#budgetInputField").val());
+             
+                
+                
+$("#budget").html(parseInt($("#budget").text()||0)+newBudget);
+ 
+$("#balance").html(parseInt($("#balance").text()||0)+newBudget);            
+
+             });
+
+             $("#addExpense").click(function(){
+                 var ename=$("#expenseNameText").val();
+                 var newExpense=$("#expenseTextField").val();
+                 var newE=parseInt(newExpense);
+                 
+                 var oldExpense=$("#expense").html()||0;
+                 
+
+                 var oldE=parseInt(oldExpense);
+                 
+                oldE+=newE;
+                
+                
+                var oldBalance=$("#balance").text();
+                var oldBal=parseInt(oldBalance);
+                 oldBal -= newExpense;
+            $("#balance").text(oldBal);
+            console.log(oldE);
+                $("#expense").text(oldE);
+                $("#expList").append(
+                "<tr>"
+                    +"<td>"+ename+"</td>"
+                    +"<td>"+newExpense+"</td>"+
+            "<td><button type='button' id='ediBtn'><i class='fas fa-edit' id='edit'></i></button><button type='button' id='deleteBtn'><i class='fas fa-trash' id='delete'></i></button></td></tr>"
+
+               );
+
+
+
+
+            });
+
+            });
+
+
+        </script>
+
+    </head>
+    <body>
+        <h1>BUDGET APP</h1>
+        <div class="main">
+            <div class="first">
+                <div class="first1">
+                    
+            
+                        <label>Please Enter Your Budget</label><br><br>
+                        <input type="text" id="budgetInputField" ><br><br>
+                        <input type="button" value="Calculate" name="calBudget" id="calculate">
+                        
+
+
+                </div>
+                <div class="first2">
+                    
+                        <label>Please Enter Your Expense
+                        </label><br><br>
+                        <input type="text" name="expenseName" id="expenseNameText"><br><br>
+                        <label>Please Enter Expense Amount</label><br><br>
+                        <input type="text" name="expense" id="expenseTextField"><br><br>
+                        <input type="Button" value="Add Expense" name="calBudget" id="addExpense">
+                        
+
+                </div>
+
+            </div>
+            <div class="second"> 
+                <div class="second1">
+<div class="grid-container">
+  <div class="grid-item"> 
+      <p style="font-size: 24px;"><b>BUDGET</b></p>
+    <i class="fas fa-money-bill-alt" style="font-size:48px;color:blue;"></i>
+    <h1>$<span id="budget"></span></h1>
+</div>
+  <div class="grid-item"><p style="font-size:24px;"><b>EXPENSES</b></p>
+    <i class="fas fa-credit-card" style="font-size:48px ; color:blue;"></i>
+    <h1>$<span id="expense"></span></h1>
+</div>
+  <div class="grid-item"><p style="font-size: 24px;"><b>BALANCE</b></p>
+    <i class="fas fa-dollar-sign" style="font-size:48px; color:blue"></i>
+    <h1>$<span id="balance"></span></h1></div>  
+ 
+</div>
+
+                </div>
+                <div class="second2">
+                    <table class="expenseTable">
+                        <tr>
+                            <th>Expense Title</th>&nbsp;
+                            <th>Expense Value</th>
+                            <th> </th>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                        <tbody id="expList">
+        
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+    </html>
+        
