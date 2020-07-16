@@ -1,0 +1,124 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 8.0.21 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| football           |
+| information_schema |
+| menu_food          |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> use football;
+Database changed
+mysql> select * from Player ;
++------+--------------+---------+------+--------+--------+--------+
+| id   | name         | jersyno | age  | salary | teamid | height |
++------+--------------+---------+------+--------+--------+--------+
+|    1 | Wes Morgan   |       5 |   30 | 180000 |      1 |      6 |
+|    2 | Jonny Evans  |       6 |   33 | 880000 |      1 |      7 |
+|    3 | Jamie Vaardy |       9 |   31 | 340000 |      1 |      4 |
+|    4 | Lys Mousset  |      16 |   23 | 340000 |      2 |      3 |
+|    5 | Besic        |      56 |   43 | 134000 |      2 |      9 |
++------+--------------+---------+------+--------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Team;
++----+----------------+-------------+
+| id | name           | foundeddate |
++----+----------------+-------------+
+|  1 | Leicester City | 1900-06-07  |
+|  2 | Sheff Utd      | 1900-03-07  |
++----+----------------+-------------+
+2 rows in set (0.00 sec)
+
+
+mysql> select *  from Player where teamid=1;
++------+--------------+---------+------+--------+--------+--------+
+| id   | name         | jersyno | age  | salary | teamid | height |
++------+--------------+---------+------+--------+--------+--------+
+|    1 | Wes Morgan   |       5 |   30 | 180000 |      1 |      6 |
+|    2 | Jonny Evans  |       6 |   33 | 880000 |      1 |      7 |
+|    3 | Jamie Vaardy |       9 |   31 | 340000 |      1 |      4 |
++------+--------------+---------+------+--------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select *  from Player where teamid=2;
++------+-------------+---------+------+--------+--------+--------+
+| id   | name        | jersyno | age  | salary | teamid | height |
++------+-------------+---------+------+--------+--------+--------+
+|    4 | Lys Mousset |      16 |   23 | 340000 |      2 |      3 |
+|    5 | Besic       |      56 |   43 | 134000 |      2 |      9 |
++------+-------------+---------+------+--------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from Player where salary>500000;
++------+-------------+---------+------+--------+--------+--------+
+| id   | name        | jersyno | age  | salary | teamid | height |
++------+-------------+---------+------+--------+--------+--------+
+|    2 | Jonny Evans |       6 |   33 | 880000 |      1 |      7 |
++------+-------------+---------+------+--------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> select name,(select sum(salary) from Player where Player.teamid=team.id) as salary from Team;
++----------------+---------+
+| name           | salary  |
++----------------+---------+
+| Leicester City | 1400000 |
+| Sheff Utd      |  474000 |
++----------------+---------+
+2 rows in set (0.00 sec)
+
+
+
+mysql> select * from Player where height>5;
++------+-------------+---------+------+--------+--------+--------+
+| id   | name        | jersyno | age  | salary | teamid | height |
++------+-------------+---------+------+--------+--------+--------+
+|    1 | Wes Morgan  |       5 |   30 | 180000 |      1 |      6 |
+|    2 | Jonny Evans |       6 |   33 | 880000 |      1 |      7 |
+|    5 | Besic       |      56 |   43 | 134000 |      2 |      9 |
++------+-------------+---------+------+--------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select name,salary from Player where salary in(select max(salary) from PLayer);
++-------------+--------+
+| name        | salary |
++-------------+--------+
+| Jonny Evans | 880000 |
++-------------+--------+
+1 row in set (0.01 sec)
+
+mysql> select name,salary from Player where salary in(select min(salary) from PLayer);
++-------+--------+
+| name  | salary |
++-------+--------+
+| Besic | 134000 |
++-------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from Player where age>30 && salary>200000;
++------+--------------+---------+------+--------+--------+--------+
+| id   | name         | jersyno | age  | salary | teamid | height |
++------+--------------+---------+------+--------+--------+--------+
+|    2 | Jonny Evans  |       6 |   33 | 880000 |      1 |      7 |
+|    3 | Jamie Vaardy |       9 |   31 | 340000 |      1 |      4 |
++------+--------------+---------+------+--------+--------+--------+
+2 rows in set, 1 warning (0.00 sec)
+
+mysql>
